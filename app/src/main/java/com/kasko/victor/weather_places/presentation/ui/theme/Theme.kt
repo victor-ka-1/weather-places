@@ -1,4 +1,4 @@
-package com.kasko.victor.weather_places.ui.theme
+package com.kasko.victor.weather_places.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

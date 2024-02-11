@@ -1,11 +1,14 @@
 package com.kasko.victor.weather_places.data.datasource.remote
 
+import com.kasko.victor.weather_places.data.datasource.remote.model.ForecastDayDto
 import com.kasko.victor.weather_places.data.datasource.remote.model.ForecastDto
+import com.kasko.victor.weather_places.utils.NetworkConstants.DAYS_COUNT_DEFAULT
+import com.kasko.victor.weather_places.utils.NetworkConstants.FORECAST_ENDPOINT
+import com.kasko.victor.weather_places.utils.NetworkConstants.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val FORECAST_ENDPOINT =  "/data/2.5/forecast/daily" //todo move
-private const val DAYS_COUNT_DEFAULT = 7 //todo move
+
 
 interface ForecastApi {
 
@@ -13,7 +16,7 @@ interface ForecastApi {
     suspend fun getForecastForLocation(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("APPID") apiKey: String = "4aff0d93fc6fb6fd2fd195632dc9bbc1", //todo move
+        @Query("APPID") apiKey: String = API_KEY, //todo move
         @Query("cnt") daysCount: Int = DAYS_COUNT_DEFAULT,
     ): ForecastDto
 

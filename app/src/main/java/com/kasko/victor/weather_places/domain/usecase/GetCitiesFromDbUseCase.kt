@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class GetCitiesFromDbUseCase
 @Inject constructor(private val repository: WeatherRepository) {
-    suspend fun getSavedCities() = repository.getSavedLocations()
+    fun getSavedCities() = repository.getSavedLocations()
 }

@@ -4,6 +4,7 @@ import com.kasko.victor.weather_places.data.datasource.local.WeatherPlacesLocalD
 import com.kasko.victor.weather_places.data.datasource.local.model.toCity
 import com.kasko.victor.weather_places.data.datasource.local.model.toCityEntity
 import com.kasko.victor.weather_places.data.datasource.remote.ForecastRemoteDataSource
+import com.kasko.victor.weather_places.data.mappers.toCity
 import com.kasko.victor.weather_places.data.mappers.toForecast
 import com.kasko.victor.weather_places.domain.model.City
 import com.kasko.victor.weather_places.domain.model.Forecast
@@ -12,6 +13,7 @@ import com.kasko.victor.weather_places.utils.Resource
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class WeatherRepositoryImpl
 @Inject constructor(
@@ -27,19 +29,14 @@ class WeatherRepositoryImpl
                 ).toForecast()
             )
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.Error(e.message ?: "An unknown error happened") //todo remove hardcoded string
         }
     }
 
-    override suspend fun getSavedLocations(): Flow<Resource<List<City>>> {
-        return flow {
-            emit(Resource.Loading(true))
-            val savedCities = localDataSource.getSavedCities()
-            emit(
-                Resource.Success(
-                    data =savedCities.map { it.toCity() }
-                )
-            )
+    override fun getSavedLocations(): Flow<List<City>> {
+        return localDataSource.getSavedCities().map {
+            it.map { it.toCity() }
         }
     }
 
@@ -47,5 +44,20 @@ class WeatherRepositoryImpl
         localDataSource.addCity(
             city.toCityEntity()
         )
+    }
+
+    override suspend fun getCityByName(cityName: String): Resource<City> {
+        return try {
+            Resource.Success(
+                remoteDataSource.getCityByName(cityName).city.toCity()
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Error(e.message ?: "unknown error")
+        }
+    }
+
+    override suspend fun clearSavedCities() {
+        localDataSource.clearSavedCities()
     }
 }

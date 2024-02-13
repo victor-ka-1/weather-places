@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.kasko.victor.weather_places.data.datasource.local.model.CityEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CityDao {
@@ -19,5 +20,5 @@ interface CityDao {
     suspend fun clear()
 
     @Query("SELECT * FROM city_entity")
-    suspend fun getCitiesFlow(): List<CityEntity>
+    fun getCitiesFlow(): Flow<List<CityEntity>>
 }

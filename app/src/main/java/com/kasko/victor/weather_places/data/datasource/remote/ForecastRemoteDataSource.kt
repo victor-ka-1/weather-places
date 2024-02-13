@@ -8,4 +8,6 @@ class ForecastRemoteDataSource
     suspend fun getForecastForLocation(latitude: Double, longitude: Double) =
         forecastApi.getForecastForLocation(latitude, longitude)
 
+    suspend fun getCityByName(cityName: String) = forecastApi.getCityByName(cityName)
+
 }

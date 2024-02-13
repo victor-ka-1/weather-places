@@ -8,3 +8,8 @@ data class CityDto(
     @SerializedName("country") val country: String,
     @SerializedName("timezone") val timezone: Int,
 )
+
+data class SearchedCityDto(
+    @SerializedName("city") val city: CityDto,
+    @SerializedName("cod") val code: String,
+)

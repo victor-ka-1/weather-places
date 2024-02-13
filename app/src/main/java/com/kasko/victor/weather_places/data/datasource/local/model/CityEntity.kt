@@ -9,14 +9,11 @@ import com.kasko.victor.weather_places.domain.model.Coordinates
 
 @Entity(tableName = "city_entity")
 data class CityEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val uid: Int = 0,
-
     var cityName: String,
     var country: String,
     var timezone: Int,
 
+    @PrimaryKey
     @Embedded
     val coordinates: Coordinates
 )

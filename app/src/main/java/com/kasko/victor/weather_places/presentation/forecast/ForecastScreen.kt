@@ -65,7 +65,7 @@ fun ForecastScreenContent(
             .fillMaxSize()
             .background(color = Color.LightGray),
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         when (forecastState) {
             is ForecastState.Error -> {
                 Text(text = forecastState.errorMessage, color = Color.Red)
@@ -87,12 +87,12 @@ fun ForecastScreenContent(
                         fontWeight = FontWeight.SemiBold
                     )
 
-                    Row (
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ){
+                    ) {
                         Text(
                             text = "Lat: ${forecastState.forecast.city.coordinate.latitude}",
                             modifier = Modifier,
@@ -141,23 +141,23 @@ fun ForecastDayItem(
             .background(color = Color.White, shape = RoundedCornerShape(4.dp))
             .padding(8.dp)
     ) {
-       Row (
-           modifier = Modifier.fillMaxWidth(),
-           horizontalArrangement = Arrangement.SpaceBetween,
-           verticalAlignment = Alignment.CenterVertically
-       ){
-           Column {
-               Text(text = forecastDay.date)
-               Text(text = "Temperature: ${forecastDay.temperatures.day}")
-               Text(text = forecastDay.weather[0].weatherName)
-           }
-           Icon(
-               modifier = Modifier
-                   .size(48.dp)
-                   .padding(end = 16.dp),
-               painter = painterResource(id = forecastDay.weather[0].getIconForWeather()),
-               contentDescription = null
-           )
-       }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(text = forecastDay.date)
+                Text(text = "Temperature: ${forecastDay.temperatures.day}")
+                Text(text = forecastDay.weather[0].weatherName)
+            }
+            Icon(
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(end = 16.dp),
+                painter = painterResource(id = forecastDay.weather[0].getIconForWeather()),
+                contentDescription = null
+            )
+        }
     }
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetCityByNameUseCase @Inject constructor(
     private val weatherRepository: WeatherRepository
 ) {
-    suspend fun getCityByName(cityName: String): Resource<City> =
+    suspend operator fun invoke(cityName: String): Resource<City> =
         weatherRepository.getCityByName(cityName)
 
 }

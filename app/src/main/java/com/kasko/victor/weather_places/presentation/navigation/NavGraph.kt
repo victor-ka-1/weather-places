@@ -1,6 +1,5 @@
 package com.kasko.victor.weather_places.presentation.navigation
 
-import android.location.Location
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -29,30 +28,30 @@ fun NavGraph(
         ) {
             composable(NavScreen.LocationScreen.route) {
                 LocationsScreen() {
-                    navController.navigate(NavScreen.ForecastScreen.route +"/${it.latitude}/${it.longitude}")
+                    navController.navigate(NavScreen.ForecastScreen.route + "/${it.latitude}/${it.longitude}")
                 }
             }
             composable(
-                route = NavScreen.ForecastScreen.route +"/{$latitude_param}"+"/{$longitude_param}",
+                route = NavScreen.ForecastScreen.route + "/{$latitude_param}" + "/{$longitude_param}",
                 arguments = listOf(
-                    navArgument(name = latitude_param){
+                    navArgument(name = latitude_param) {
                         type = NavType.FloatType
                     },
-                    navArgument(name = longitude_param){
+                    navArgument(name = longitude_param) {
                         type = NavType.FloatType
                     }
                 )
-                ) {
+            ) {
                 val latitude = it.arguments?.getFloat(latitude_param) ?: 0f
                 val longitude = it.arguments?.getFloat(longitude_param) ?: 0f
-                ForecastScreen(viewModel = forecastViewModel,latitude = latitude, longitude = longitude) {
-                    navController.navigate(NavScreen.ForecastDetailsScreen.route +"/$it")
+                ForecastScreen(viewModel = forecastViewModel, latitude = latitude, longitude = longitude) {
+                    navController.navigate(NavScreen.ForecastDetailsScreen.route + "/$it")
                 }
             }
             composable(
-                route = NavScreen.ForecastDetailsScreen.route +"/{$selected_day_index_param}",
+                route = NavScreen.ForecastDetailsScreen.route + "/{$selected_day_index_param}",
                 arguments = listOf(
-                    navArgument(name = selected_day_index_param){
+                    navArgument(name = selected_day_index_param) {
                         type = NavType.IntType
                     },
                 )
@@ -65,7 +64,7 @@ fun NavGraph(
 }
 
 sealed class NavScreen(val route: String) {
-    data object LocationScreen: NavScreen(Routes.locationsRoute)
-    data object ForecastScreen: NavScreen(Routes.LocationForecastRoute)
-    data object ForecastDetailsScreen: NavScreen(Routes.ForecastDetailsRoute)
+    data object LocationScreen : NavScreen(Routes.locationsRoute)
+    data object ForecastScreen : NavScreen(Routes.LocationForecastRoute)
+    data object ForecastDetailsScreen : NavScreen(Routes.ForecastDetailsRoute)
 }

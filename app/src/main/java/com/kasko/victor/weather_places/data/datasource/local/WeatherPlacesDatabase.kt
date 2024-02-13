@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.kasko.victor.weather_places.data.datasource.local.model.CityEntity
 
 @Database(entities = [CityEntity::class], version = 1)
-abstract class WeatherPlacesDatabase: RoomDatabase() {
+abstract class WeatherPlacesDatabase : RoomDatabase() {
 
     abstract fun cityDao(): CityDao
 }

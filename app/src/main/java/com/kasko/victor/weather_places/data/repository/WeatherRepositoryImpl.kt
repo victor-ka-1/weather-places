@@ -12,7 +12,6 @@ import com.kasko.victor.weather_places.domain.repository.WeatherRepository
 import com.kasko.victor.weather_places.utils.Resource
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class WeatherRepositoryImpl

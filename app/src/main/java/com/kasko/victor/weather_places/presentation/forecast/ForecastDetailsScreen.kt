@@ -48,9 +48,8 @@ fun ForecastDetailsScreenContent(
     if (forecastState is ForecastState.Success) {
         ForecastDetails(forecastState.forecast.forecasts[viewModel.selectedDayIndex])
     } else {
-        Text(text = "Error happened while fetching forecast", color =  Color.Red)
+        Text(text = "Error happened while fetching forecast", color = Color.Red)
     }
-
 }
 
 @Composable
@@ -75,14 +74,22 @@ fun ForecastDetails(
             Text(text = "Sunrise: ${forecastDay.sunrise}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
             Text(text = "Sunset: ${forecastDay.sunset}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
         }
-        Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly){
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             Column {
-                Text(text = "Day Temp.: ${forecastDay.temperatures.day}°C", fontSize = 22.sp, modifier = Modifier.padding(4.dp))
-                Text(text = "Feels like: ${forecastDay.feelsLike.day}°C", fontSize = 22.sp, modifier = Modifier.padding(4.dp))
+                Text(text = "Day Temp.: ${forecastDay.temperatures.day}°C",
+                    fontSize = 22.sp,
+                    modifier = Modifier.padding(4.dp))
+                Text(text = "Feels like: ${forecastDay.feelsLike.day}°C",
+                    fontSize = 22.sp,
+                    modifier = Modifier.padding(4.dp))
             }
             Column {
-                Text(text = "Night Temp.: ${forecastDay.temperatures.night}°C", fontSize = 22.sp, modifier = Modifier.padding(4.dp))
-                Text(text = "Feels like: ${forecastDay.feelsLike.night}°C", fontSize = 22.sp, modifier = Modifier.padding(4.dp))
+                Text(text = "Night Temp.: ${forecastDay.temperatures.night}°C",
+                    fontSize = 22.sp,
+                    modifier = Modifier.padding(4.dp))
+                Text(text = "Feels like: ${forecastDay.feelsLike.night}°C",
+                    fontSize = 22.sp,
+                    modifier = Modifier.padding(4.dp))
             }
 
         }
@@ -91,5 +98,4 @@ fun ForecastDetails(
         Text(text = "Humidity: ${forecastDay.humidity}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
 
     }
-
 }

@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class GetCitiesFromDbUseCase
 @Inject constructor(private val repository: WeatherRepository) {
-    fun getSavedCities() = repository.getSavedLocations()
+    operator fun invoke() = repository.getSavedLocations()
 }

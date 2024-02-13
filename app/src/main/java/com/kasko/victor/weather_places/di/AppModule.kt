@@ -1,13 +1,11 @@
 package com.kasko.victor.weather_places.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.kasko.victor.weather_places.data.datasource.local.CityDao
 import com.kasko.victor.weather_places.data.datasource.local.WeatherPlacesDatabase
 import com.kasko.victor.weather_places.data.datasource.remote.ForecastApi
 import com.kasko.victor.weather_places.utils.NetworkConstants.BASE_URL
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

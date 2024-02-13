@@ -1,6 +1,5 @@
 package com.kasko.victor.weather_places.data.utils
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import com.kasko.victor.weather_places.R
 import com.kasko.victor.weather_places.domain.model.Weather

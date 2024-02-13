@@ -2,9 +2,6 @@ package com.kasko.victor.weather_places.presentation.locations
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kasko.victor.weather_places.domain.model.City
-import com.kasko.victor.weather_places.domain.model.Coordinates
-import com.kasko.victor.weather_places.domain.repository.WeatherRepository
 import com.kasko.victor.weather_places.domain.usecase.AddCityUseCase
 import com.kasko.victor.weather_places.domain.usecase.GetCitiesFromDbUseCase
 import com.kasko.victor.weather_places.domain.usecase.GetCityByNameUseCase
@@ -20,7 +17,7 @@ class LocationsViewModel
 @Inject constructor(
     private val addCity: AddCityUseCase,
     private val getCitiesFromDb: GetCitiesFromDbUseCase,
-    private val getCityByNameUseCase: GetCityByNameUseCase
+    private val getCityByName: GetCityByNameUseCase
 ) : ViewModel() {
 
     private val _searchFieldState = MutableStateFlow("")
@@ -42,7 +39,7 @@ class LocationsViewModel
 
     private fun loadSavedCities() {
         viewModelScope.launch {
-            getCitiesFromDb.getSavedCities()
+            getCitiesFromDb()
                 .collect { result ->
                     _addedCitiesState.value = CitiesState.Success(result)
                 }
@@ -51,8 +48,9 @@ class LocationsViewModel
 
     fun searchCityByName(cityName: String) {
         viewModelScope.launch {
-            _foundCityState.value = when (val result = getCityByNameUseCase.getCityByName(cityName)) {
+            _foundCityState.value = when (val result = getCityByName(cityName)) {
                 is Resource.Error -> {
+                    //todo avoid hardcoded error messages
                     SearchedCityState.Error(errorMessage = "Failed to search this city")
                 }
 
@@ -67,7 +65,7 @@ class LocationsViewModel
         viewModelScope.launch {
             val selectedCity = _foundCityState.value as? SearchedCityState.Success
             selectedCity?.let {
-                addCity.addCity(it.city)
+                addCity(it.city)
                 _foundCityState.value = SearchedCityState.Idle
             }
         }

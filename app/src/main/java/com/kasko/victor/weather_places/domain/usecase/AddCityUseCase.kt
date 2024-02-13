@@ -7,5 +7,5 @@ import javax.inject.Inject
 class AddCityUseCase @Inject constructor(
     private val repository: WeatherRepository
 ) {
-    suspend fun addCity(city: City) = repository.addCity(city)
+    suspend operator fun invoke(city: City) = repository.addCity(city)
 }

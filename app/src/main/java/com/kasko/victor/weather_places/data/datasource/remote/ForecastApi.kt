@@ -18,7 +18,7 @@ interface ForecastApi {
     suspend fun getForecastForLocation(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("APPID") apiKey: String = API_KEY, //todo move
+        @Query("APPID") apiKey: String = API_KEY,
         @Query("cnt") daysCount: Int = DAYS_COUNT_DEFAULT,
         @Query("lang") language: String = LANGUAGE_DEFAULT,
         @Query("units") units: String = UNITS_DEFAULT
@@ -31,7 +31,6 @@ interface ForecastApi {
         @Query("units") units: String = UNITS_DEFAULT,
         @Query("cnt") count: Int = CITY_WEATHER_DEFAULT
     ): SearchedCityDto
-
 }
 
 

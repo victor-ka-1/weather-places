@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class ForecastViewModel
 @Inject constructor(
-    private val getWeatherForecastForLocationUseCase: GetWeatherForecastForLocationUseCase
-): ViewModel() {
+    private val getWeatherForecastForLocation: GetWeatherForecastForLocationUseCase
+) : ViewModel() {
 
     private val _forecastState = MutableStateFlow<ForecastState>(ForecastState.Loading)
     val forecastState = _forecastState.asStateFlow()
@@ -27,19 +27,20 @@ class ForecastViewModel
         latitude: Float, longitude: Float
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            when(val result = getWeatherForecastForLocationUseCase.getWeatherForecastForLocation(
+            when (val result = getWeatherForecastForLocation(
                 latitude = latitude.toDouble(),
                 longitude = longitude.toDouble(),
             )) {
                 is Resource.Error -> {
                     _forecastState.value = ForecastState.Error("error happened")
                 }
+
                 is Resource.Loading -> _forecastState.value = ForecastState.Loading
                 is Resource.Success -> _forecastState.value =
-                    if(result.data != null)
-                    ForecastState.Success(result.data)
-                else
-                    ForecastState.Error("result == null")
+                    if (result.data != null)
+                        ForecastState.Success(result.data)
+                    else
+                        ForecastState.Error("result == null")
             }
 
         }
@@ -48,5 +49,4 @@ class ForecastViewModel
     fun setSelectedDayIndex(index: Int) {
         selectedDayIndex = index
     }
-
 }

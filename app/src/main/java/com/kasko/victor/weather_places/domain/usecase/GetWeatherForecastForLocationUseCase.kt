@@ -8,6 +8,6 @@ import javax.inject.Inject
 class GetWeatherForecastForLocationUseCase
 @Inject constructor(private val weatherRepository: WeatherRepository) {
 
-    suspend fun getWeatherForecastForLocation(latitude: Double, longitude: Double): Resource<Forecast> =
+    suspend operator fun invoke(latitude: Double, longitude: Double): Resource<Forecast> =
         weatherRepository.getForecastForLocation(latitude, longitude)
 }

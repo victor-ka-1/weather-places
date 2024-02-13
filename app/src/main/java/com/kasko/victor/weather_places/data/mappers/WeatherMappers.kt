@@ -1,12 +1,10 @@
 package com.kasko.victor.weather_places.data.mappers
 
-import android.annotation.SuppressLint
 import android.text.format.DateFormat
 import com.kasko.victor.weather_places.data.datasource.remote.model.ForecastDayDto
 import com.kasko.victor.weather_places.data.datasource.remote.model.ForecastDto
 import com.kasko.victor.weather_places.data.datasource.remote.model.TemperatureDto
 import com.kasko.victor.weather_places.data.datasource.remote.model.WeatherDto
-import com.kasko.victor.weather_places.domain.model.City
 import com.kasko.victor.weather_places.domain.model.Forecast
 import com.kasko.victor.weather_places.domain.model.ForecastDay
 import com.kasko.victor.weather_places.domain.model.Temperature

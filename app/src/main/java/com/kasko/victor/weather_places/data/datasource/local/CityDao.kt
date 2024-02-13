@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CityDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addCity(cityEntity: CityEntity)
 

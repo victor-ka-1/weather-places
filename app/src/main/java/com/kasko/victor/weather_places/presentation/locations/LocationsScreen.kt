@@ -30,12 +30,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kasko.victor.weather_places.R
 import com.kasko.victor.weather_places.domain.model.Coordinates
 
 @Composable
@@ -53,7 +55,7 @@ fun LocationsScreen(viewModel: LocationsViewModel = hiltViewModel(),
             textAlign = TextAlign.Center,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            text = "My Locations"
+            text = stringResource(R.string.my_locations)
         )
         LocationsScreenContent(
             viewModel = viewModel,
@@ -79,7 +81,7 @@ fun LocationsScreenContent(
             viewModel.updateSearchFieldState(it)
         },
         maxLines = 1,
-        label = { Text(text = "Enter city name and click search") },
+        label = { Text(text = stringResource(R.string.enter_city_name_and_click_search)) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         trailingIcon = {
             IconButton(onClick = {
@@ -88,7 +90,7 @@ fun LocationsScreenContent(
                 Icon(
                     imageVector = Icons.Rounded.Search,
                     tint = Color.Black,
-                    contentDescription = "Search button"
+                    contentDescription = stringResource(R.string.search_button)
                 )
             }
         }
@@ -108,7 +110,7 @@ fun SearchedCityComponent(viewModel: LocationsViewModel, foundCity: SearchedCity
             }
 
             SearchedCityState.Idle -> {
-                Text(text = "Search the city and add it to your locations", fontSize = 18.sp)
+                Text(text = stringResource(R.string.search_the_city_and_add_it_to_your_locations), fontSize = 18.sp)
             }
 
             SearchedCityState.Loading -> {
@@ -127,13 +129,13 @@ fun SearchedCityComponent(viewModel: LocationsViewModel, foundCity: SearchedCity
                     Text(text = foundCity.city.cityName)
                     Spacer(modifier = Modifier.width(width = 16.dp))
                     Column {
-                        Text(text = "latitude:${foundCity.city.coordinate.latitude}")
-                        Text(text = "longitude:${foundCity.city.coordinate.longitude}")
+                        Text(text = stringResource(R.string.latitude, foundCity.city.coordinate.latitude))
+                        Text(text = stringResource(R.string.longitude, foundCity.city.coordinate.longitude))
                     }
                     IconButton(onClick = { viewModel.addSearchedCityToSaved() }) {
                         Icon(
                             imageVector = Icons.Rounded.Add,
-                            contentDescription = "Add city to saved",
+                            contentDescription = stringResource(R.string.add_city_to_saved),
                             modifier = Modifier.size(48.dp)
                         )
                     }
@@ -188,15 +190,15 @@ fun SavedCitiesComponent(
                                 Text(text = it.cityName)
                                 Spacer(modifier = Modifier.width(width = 16.dp))
                                 Column {
-                                    Text(text = "latitude:${it.coordinate.latitude}")
-                                    Text(text = "longitude:${it.coordinate.longitude}")
+                                    Text(text = stringResource(R.string.latitude, it.coordinate.latitude))
+                                    Text(text = stringResource(R.string.longitude, it.coordinate.longitude))
                                 }
                             }
                         }
                     }
                 } else {
                     Text(
-                        text = "No cities added yet.",
+                        text = stringResource(R.string.no_cities_added_yet),
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                     )

@@ -26,10 +26,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kasko.victor.weather_places.R
 import com.kasko.victor.weather_places.data.utils.getIconForWeather
 import com.kasko.victor.weather_places.domain.model.ForecastDay
 
@@ -86,7 +88,7 @@ fun ForecastScreenContent(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Lat: ${forecastState.forecast.city.coordinate.latitude}",
+                            text = stringResource(R.string.lat, forecastState.forecast.city.coordinate.latitude),
                             modifier = Modifier,
                             textAlign = TextAlign.Center,
                             fontSize = 24.sp,
@@ -94,7 +96,8 @@ fun ForecastScreenContent(
                         )
                         Spacer(modifier = Modifier.width(24.dp))
                         Text(
-                            text = "Long: ${forecastState.forecast.city.coordinate.longitude}",
+                            text = stringResource(R.string.longitude_short,
+                                forecastState.forecast.city.coordinate.longitude),
                             modifier = Modifier,
                             textAlign = TextAlign.Center,
                             fontSize = 24.sp,
@@ -140,7 +143,7 @@ fun ForecastDayItem(
         ) {
             Column {
                 Text(text = forecastDay.date)
-                Text(text = "Temperature: ${forecastDay.temperatures.day}")
+                Text(text = stringResource(R.string.temperature, forecastDay.temperatures.day))
                 Text(text = forecastDay.weather[0].weatherName)
             }
             Icon(

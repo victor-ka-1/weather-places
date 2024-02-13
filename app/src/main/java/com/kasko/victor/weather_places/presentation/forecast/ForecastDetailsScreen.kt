@@ -18,8 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kasko.victor.weather_places.R
 import com.kasko.victor.weather_places.data.utils.getIconForWeather
 import com.kasko.victor.weather_places.domain.model.ForecastDay
 
@@ -46,7 +48,7 @@ fun ForecastDetailsScreenContent(
     if (forecastState is ForecastState.Success) {
         ForecastDetails(forecastState.forecast.forecasts[viewModel.selectedDayIndex])
     } else {
-        Text(text = "Error happened while fetching forecast", color = Color.Red)
+        Text(text = stringResource(R.string.error_happened_while_fetching_forecast), color = Color.Red)
     }
 }
 
@@ -69,31 +71,39 @@ fun ForecastDetails(
         )
         Text(text = forecastDay.weather[0].weatherDescription, fontSize = 21.sp, modifier = Modifier.padding(10.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            Text(text = "Sunrise: ${forecastDay.sunrise}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
-            Text(text = "Sunset: ${forecastDay.sunset}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
+            Text(text = stringResource(R.string.sunrise, forecastDay.sunrise),
+                fontSize = 20.sp,
+                modifier = Modifier.padding(4.dp))
+            Text(text = stringResource(R.string.sunset, forecastDay.sunset),
+                fontSize = 20.sp,
+                modifier = Modifier.padding(4.dp))
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             Column {
-                Text(text = "Day Temp.: ${forecastDay.temperatures.day}°C",
+                Text(text = stringResource(R.string.day_temp_c, forecastDay.temperatures.day),
                     fontSize = 22.sp,
                     modifier = Modifier.padding(4.dp))
-                Text(text = "Feels like: ${forecastDay.feelsLike.day}°C",
+                Text(text = stringResource(R.string.feels_like_c, forecastDay.feelsLike.day),
                     fontSize = 22.sp,
                     modifier = Modifier.padding(4.dp))
             }
             Column {
-                Text(text = "Night Temp.: ${forecastDay.temperatures.night}°C",
+                Text(text = stringResource(R.string.night_temp_c, forecastDay.temperatures.night),
                     fontSize = 22.sp,
                     modifier = Modifier.padding(4.dp))
-                Text(text = "Feels like: ${forecastDay.feelsLike.night}°C",
+                Text(text = stringResource(R.string.feels_like_c, forecastDay.feelsLike.night),
                     fontSize = 22.sp,
                     modifier = Modifier.padding(4.dp))
             }
 
         }
 
-        Text(text = "Pressure: ${forecastDay.pressure}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
-        Text(text = "Humidity: ${forecastDay.humidity}", fontSize = 20.sp, modifier = Modifier.padding(4.dp))
+        Text(text = stringResource(R.string.pressure, forecastDay.pressure),
+            fontSize = 20.sp,
+            modifier = Modifier.padding(4.dp))
+        Text(text = stringResource(R.string.humidity, forecastDay.humidity),
+            fontSize = 20.sp,
+            modifier = Modifier.padding(4.dp))
 
     }
 }

@@ -20,10 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kasko.victor.weather_places.R
 import com.kasko.victor.weather_places.data.utils.getIconForWeather
 import com.kasko.victor.weather_places.domain.model.ForecastDay
-import com.kasko.victor.weather_places.presentation.navigation.NavScreen
 
 @Composable
 fun ForecastDetailsScreen(viewModel: ForecastViewModel, selectedDayIndex: Int) {

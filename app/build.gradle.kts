@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -81,7 +82,7 @@ dependencies {
     // Room
     val roomVersion = "2.6.1"
     implementation ("androidx.room:room-ktx:$roomVersion")
-    kapt ("androidx.room:room-compiler:$roomVersion")
+    ksp ("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
 
     // Retrofit
